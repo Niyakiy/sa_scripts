@@ -1,26 +1,15 @@
 #!/bin/sh
-# http://kedar.nitty-witty.com
+
 #SPLIT DUMP FILE INTO INDIVIDUAL TABLE DUMPS
-# Text color variables
-txtund=$(tput sgr 0 1)    # Underline
-txtbld=$(tput bold)       # Bold
-txtred=$(tput setaf 1)    # Red
-txtgrn=$(tput setaf 2)    # Green
-txtylw=$(tput setaf 3)    # Yellow
-txtblu=$(tput setaf 4)    # Blue
-txtpur=$(tput setaf 5)    # Purple
-txtcyn=$(tput setaf 6)    # Cyan
-txtwht=$(tput setaf 7)    # White
-txtrst=$(tput sgr0)       # Text reset
 
 TARGET_DIR="."
 DUMP_FILE=$1
 TABLE_COUNT=0
 
 if [ $# = 0 ]; then
-        echo "${txtbld}${txtred}Usage: sh MyDumpSplitter.sh DUMP-FILE-NAME${txtrst} -- Extract all tables as a separate file from dump."
-        echo "${txtbld}${txtred}       sh MyDumpSplitter.sh DUMP-FILE-NAME TABLE-NAME ${txtrst} -- Extract single table from dump."
-        echo "${txtbld}${txtred}       sh MyDumpSplitter.sh DUMP-FILE-NAME -S TABLE-NAME-REGEXP ${txtrst} -- Extract tables from dump for specified regular expression."
+        echo "Usage: MyDumpSplitter.sh DUMP-FILE-NAME -- Extract all tables as a separate file from dump."
+        echo "       MyDumpSplitter.sh DUMP-FILE-NAME TABLE-NAME -- Extract single table from dump."
+        echo "       MyDumpSplitter.sh DUMP-FILE-NAME -S TABLE-NAME-REGEXP -- Extract tables from dump for specified regular expression."
         exit;
 elif [ $# = 1 ]; then
         #Loop for each tablename found in provided dumpfile
@@ -49,10 +38,10 @@ elif [ $# = 3  ]; then
                         TABLE_COUNT=$((TABLE_COUNT+1))
                 done;
         else
-                echo "${txtbld}${txtred} Please provide proper parameters. ${txtrst}";
+                echo "Please provide proper parameters.";
         fi
 fi
 
 #Summary
-echo "${txtbld}$TABLE_COUNT Table extracted from $DUMP_FILE at $TARGET_DIR${txtrst}"
+echo "$TABLE_COUNT Table extracted from $DUMP_FILE at $TARGET_DIR"
                                                                 
